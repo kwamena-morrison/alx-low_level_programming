@@ -4,7 +4,7 @@
  * infinite_add - adds two numbers
  * @n1: number one.
  * @n2: number two.
- * @r: the buffer that the function will use to store the result.
+ * @r: buffer that the function will use to store the result.
  * @size_r: buffer size:
  * Return: the pointer to dest.
  */
@@ -52,4 +52,3 @@ char *infinite_add(char *n1, char *n2, char *r, int size_r)
 	else
 		return (r);
 }
-
