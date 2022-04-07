@@ -1,85 +1,53 @@
 #include <stdio.h>
-#include "main.h"
-
+#include <stdbool.h>
+#include <stdlib.h>
 /**
- * _atoi - converts a string to an integer
- * @s: string to be converted
+ * isNumeric - checks if string  is numeric
  *
- * Return: the int converted from the string
+ * @s: string to check
+ *
+ * Return: true if is numeric, otherwise return false
  */
-int _atoi(char *s)
+bool isNumeric(char *s)
 {
-	int i, d, n, len, f, digit;
+	int i;
 
-	i = 0;
-	d = 0;
-	n = 0;
-	len = 0;
-	f = 0;
-	digit = 0;
-
-	while (s[len] != '\0')
-		len++;
-
-	while (i < len && f == 0)
+	for (i = 0; s[i] != '\0'; i++)
 	{
-		if (s[i] == '-')
-			++d;
-
-		if (s[i] >= '0' && s[i] <= '9')
+		if (s[i] < 48 || s[i] > 57)
 		{
-			digit = s[i] - '0';
-			if (d % 2)
-				digit = -digit;
-			n = n * 10 + digit;
-			f = 1;
-			if (s[i + 1] < '0' || s[i + 1] > '9')
-				break;
-			f = 0;
+			return (false);
 		}
-		i++;
 	}
-
-	if (f == 0)
-		return (0);
-
-	return (n);
+	return (true);
 }
 
 /**
- * main - adds two positive number
- * @argc: number of arguments
- * @argv: array of arguents
+ * main - Entry Point
  *
- * Return: 0 (Success), or 1 (Success)
+ * @argc: arg counter
+ * @argv: arguments array
+ *
+ * Return: Always 0 (Success)
  */
 int main(int argc, char *argv[])
 {
-	int sum, num, i, j, k;
-
-	sum = 0;
+	int sum = 0;
+	int i;
+	(void)argc;
+	(void)argv;
 
 	for (i = 1; i < argc; i++)
 	{
-		for (j = 0; argv[i][j] != '\0'; j++)
+		if (!isNumeric(argv[i]))
 		{
-			if (argv[i][j] > '9' || argv[i][j] < '0')
-			{
-				puts("Error");
-				return (1);
-			}
+			printf("Error\n");
+			return (1);
 		}
-	}
-
-	for (k = 1; k < argc; k++)
-	{
-		num = _atoi(argv[k]);
-		if (num >= 0)
-		{
-			sum += num;
-		}
+		sum += atoi(argv[i]);
 	}
 
 	printf("%d\n", sum);
+
 	return (0);
 }
